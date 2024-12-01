@@ -11,7 +11,7 @@ end
 col1.sort!
 col2.sort!
 sum = 0
-abs_sum = 0
+
 col1.each_with_index do |c1, idx|
   lower, higher = [c1.to_i,col2[idx].to_i].sort
   
