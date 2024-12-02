@@ -24,11 +24,9 @@ class Report
       temp_line = level_str.split
       temp_line.delete_at(num)
       # puts "-- now testing #{temp_line.join(" ")}"
-      found_safe = Report.new(temp_line.join(" ")).safe?
-      # puts "  -- #{found_safe}"
-      return true if found_safe
+      return true if Report.new(temp_line.join(" ")).safe?
     end
-    return nil
+    nil
   end
   
   def set_direction
@@ -68,7 +66,7 @@ class Report
     check_levels?
   end
 
-  def all_safe?
+  def any_safe?
     safe? || check_variants?
   end
 end
