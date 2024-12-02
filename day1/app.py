@@ -22,7 +22,7 @@ for idx in range(len(sorted_col1)):
         sum = b -a     
     total += sum
 
-print( "Question 1: sum is %d " % total)
+print(f"Question 1: sum is {total}")
 
 total_scores = 0
 for num1 in col1:
