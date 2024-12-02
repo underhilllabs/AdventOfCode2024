@@ -9,13 +9,13 @@ for line in file.readlines():
     col1.append(int(c1))
     col2.append(int(c2))
 
-sorted_col1 = sorted(col1)
-sorted_col2 = sorted(col2)
+col1.sort()
+col2.sort()
 
 total = 0
-for idx in range(len(sorted_col1)):
-    a = sorted_col1[idx]
-    b = sorted_col2[idx]
+for idx in range(len(col1)):
+    a = col1[idx]
+    b = col2[idx]
     if (a > b):
         sum = a - b
     else:

@@ -1,10 +1,10 @@
 FILE = "test.txt"
-# FILE = "input.txt"
+FILE = "input.txt"
 col1 = []
 col2 = []
 
 
-lines = File.readlines(FILE).each_with_index do |line, idx|
+File.readlines(FILE).each_with_index do |line, idx|
   col1[idx], col2[idx] = line.split
 end
 
