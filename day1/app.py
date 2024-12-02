@@ -1,3 +1,4 @@
+# fname = "test.txt"
 fname = "input.txt"
 file = open(fname)
 col1 = []
@@ -21,4 +22,18 @@ for idx in range(len(sorted_col1)):
         sum = b -a     
     total += sum
 
-print( "sum is %d " % total)
+print( "Question 1: sum is %d " % total)
+
+total_scores = 0
+for num1 in col1:
+    count = 0
+    for num2 in col2:
+        if num2 == num1:
+            count += 1
+    sim_score = count * num1
+    total_scores += sim_score
+
+print(f"Question 2: sum {total_scores}")
+
+
+
