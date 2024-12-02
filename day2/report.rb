@@ -23,9 +23,9 @@ class Report
     0.upto(level_str.split.length-1).each do |num|
       temp_line = level_str.split
       temp_line.delete_at(num)
-      puts "-- now testing #{temp_line.join(" ")}"
+      # puts "-- now testing #{temp_line.join(" ")}"
       found_safe = Report.new(temp_line.join(" ")).safe?
-      puts "  -- #{found_safe}"
+      # puts "  -- #{found_safe}"
       return true if found_safe
     end
     return nil
