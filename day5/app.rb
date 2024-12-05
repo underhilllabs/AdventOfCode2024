@@ -52,6 +52,7 @@ end
 puts "Q1: got #{mids.map(&:to_i).sum}"
 #puts "now work on: #{out_of_order}"
 
+#------ Part 2 ------------
 def check_and_shuffle_order(pages, fa_pages)
   pages.each_with_index do |p, idx1|
     haystack = pages.slice_after(p)
@@ -71,7 +72,7 @@ def check_and_shuffle_order(pages, fa_pages)
   return true, pages
 end
 
-#puts "now fix all of these {out_of_order}"
+#---- fix all of the {out_of_order} page updates
 out_of_order.each do |ord|
   pages = ord.split(",")
   status = false
