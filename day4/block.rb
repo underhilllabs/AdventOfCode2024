@@ -1,7 +1,7 @@
 class Block
   attr_reader :lines, :max_x, :max_y, :count, :data
-	def initialize(file)
-		@lines = File.open(file).readlines.map(&:chomp)
+  def initialize(file)
+    @lines = File.open(file).readlines.map(&:chomp)
     y = 0
     @data = Array.new(@lines[0].length){Array.new(@lines.count)}
     @lines.each_with_index do |line, y|
@@ -60,69 +60,67 @@ class Block
   end
 
   def check_all_xmas(x, y)
-	  loc_count = 0
-	  loc_count += 1 if check_forward(x, y)
-	  loc_count += 1 if check_back(x, y)
-	  loc_count += 1 if check_up(x, y)
-	  loc_count += 1 if check_down(x, y)
-	  loc_count += 1 if check_dr(x, y)
-	  loc_count += 1 if check_dl(x, y)
-	  loc_count += 1 if check_ur(x, y)
-	  loc_count += 1 if check_ul(x, y)                                                      
-	  loc_count
-	end
-
-	def check_forward(x, y)
-	  return if (x+3) > max_x
-
-	  return data[x][y] == 'X' && data[x+1][y] == 'M' && data[x+2][y] == 'A' && data[x+3][y] == 'S'
-	end
-
-	def check_back(x, y)
-	  return if (x-3) < 0
-
-	  return data[x][y] == 'X' && data[x-1][y] == 'M' && data[x-2][y] == 'A' && data[x-3][y] == 'S'
-	end
-
-	def check_down(x, y)
-	  return if (y+3) >= max_y
-
-	  return data[y][x] == 'X' && data[y+1][x] == 'M' && data[y+2][x] == 'A' && data[y+3][x] == 'S'
+    loc_count = 0
+    loc_count += 1 if check_forward(x, y)
+    loc_count += 1 if check_back(x, y)
+    loc_count += 1 if check_up(x, y)
+    loc_count += 1 if check_down(x, y)
+    loc_count += 1 if check_dr(x, y)
+    loc_count += 1 if check_dl(x, y)
+    loc_count += 1 if check_ur(x, y)
+    loc_count += 1 if check_ul(x, y)                                                      
+    loc_count
   end
 
-	def check_up(x, y)
-	  return if (y-3) < 0
+  def check_forward(x, y)
+    return if (x+3) > max_x
 
-	  return data[y][x] == 'X' && data[y-1][x] == 'M' && data[y-2][x] == 'A' && data[y-3][x] == 'S'
-	end
+    return data[x][y] == 'X' && data[x+1][y] == 'M' && data[x+2][y] == 'A' && data[x+3][y] == 'S'
+  end
 
-	def check_dl(x, y)
-	  return if (x-3) < 0 
+  def check_back(x, y)
+    return if (x-3) < 0
+
+    return data[x][y] == 'X' && data[x-1][y] == 'M' && data[x-2][y] == 'A' && data[x-3][y] == 'S'
+  end
+
+  def check_down(x, y)
+    return if (y+3) >= max_y
+
+    return data[y][x] == 'X' && data[y+1][x] == 'M' && data[y+2][x] == 'A' && data[y+3][x] == 'S'
+  end
+
+  def check_up(x, y)
+    return if (y-3) < 0
+
+    return data[y][x] == 'X' && data[y-1][x] == 'M' && data[y-2][x] == 'A' && data[y-3][x] == 'S'
+  end
+
+  def check_dl(x, y)
+    return if (x-3) < 0 
     return if (y+3) > max_y
-	  
-    return data[y][x] == 'X' && data[y+1][x-1] == 'M' && data[y+2][x-2] == 'A' && data[y+3][x-3] == 'S'
-	end
 
-	def check_dr(x, y)
+    return data[y][x] == 'X' && data[y+1][x-1] == 'M' && data[y+2][x-2] == 'A' && data[y+3][x-3] == 'S'
+  end
+
+  def check_dr(x, y)
     return if (x+3) >= max_x 
     return if (y+3) >= max_y 
     puts "#w{x} #{y}: check_dr: #{data[y][x]} #{data[y+1][x+1]} #{data[y+2][x+2]} #{data[y+3][x+3]}"
-	  return data[y][x] == 'X' && data[y+1][x+1] == 'M' && data[y+2][x+2] == 'A' && data[y+3][x+3] == 'S'
-	end
+    return data[y][x] == 'X' && data[y+1][x+1] == 'M' && data[y+2][x+2] == 'A' && data[y+3][x+3] == 'S'
+  end
 
-	def check_ul(x, y)
+  def check_ul(x, y)
     return if (x-3) < 0 
     return if (y-3) < 0 
 
-	  return data[y][x] == 'X' && data[y-1][x-1] == 'M' && data[y-2][x-2] == 'A' && data[y-3][x-3] == 'S'
-	end
+    return data[y][x] == 'X' && data[y-1][x-1] == 'M' && data[y-2][x-2] == 'A' && data[y-3][x-3] == 'S'
+  end
 
-	def check_ur(x, y)
+  def check_ur(x, y)
     return if (x+3) > max_x
     return if (y-3) < 0
 
-	  return data[y][x] == 'X' && data[y-1][x+1] == 'M' && data[y-2][x+2] == 'A' && data[y-3][x+3] == 'S'
-	end
-
-
+    return data[y][x] == 'X' && data[y-1][x+1] == 'M' && data[y-2][x+2] == 'A' && data[y-3][x+3] == 'S'
+  end
 end
