@@ -1,5 +1,5 @@
 class Block
-  attr_reader :lines, :max_x, :max_y, :count, :data
+  attr_reader :lines, :max_x, :max_y, :count, :data, :a_count
   def initialize(file)
     @lines = File.open(file).readlines.map(&:chomp)
     y = 0
@@ -12,11 +12,13 @@ class Block
 
     # puts "initialized #{@data}"
     @count = 0
+    @a_count = 0
     @max_x = lines[0].length
     puts lines[0]
     @max_y = lines.count
     puts "max_x: #{max_x}, max_y: #{max_y}" 
     find_starts
+    find_a_starts
     # puts "cool test"
     # test(5,9)
     # puts "cooler test"
@@ -60,6 +62,28 @@ class Block
 	# puts print_loc(5, 9)
   end
 
+  def find_a_starts
+    lines.each_with_index do |line,y|
+      line.split("").each_with_index do |char, x|
+        if char == 'A'
+          # puts "found char #{char} at [#{x},#{y}]" if char == "X" 
+          # puts "count is currently #{count}"
+          subcount = check_all_x_mas(x, y)
+          # puts "found char #{char} at [#{x},#{y}]" if char == "X" && subcount > 0
+          puts "---found #{subcount} at #{x} #{y}" if subcount > 0
+          @a_count += subcount
+        end
+      end
+      y += 1
+    end
+    puts "Q2: found grand total count of #{a_count}"
+  end
+  def check_all_x_mas(x, y)
+    loc_count = 0
+    loc_count += 1 if check_x_mas(x, y)
+    loc_count
+  end
+
   def check_all_xmas(x, y)
     loc_count = 0
     loc_count += 1 if check_forward(x, y)
@@ -71,6 +95,26 @@ class Block
     loc_count += 1 if check_ur(x, y)
     loc_count += 1 if check_ul(x, y)                                                      
     loc_count
+  end
+
+  def check_x_mas(x, y)
+    # a is at x, y
+    return unless x > 0 && x < (max_x - 1)
+    return unless y > 0 && y < (max_y - 1)
+    
+    # MM
+    # SS
+    return true if data[x-1][y-1] == 'M' && data[x+1][y-1] == 'M' && data[x-1][y+1] == 'S' && data[x+1][y+1] == 'S'
+    # SS
+    # MM
+    return true if data[x-1][y-1] == 'S' && data[x+1][y-1] == 'S' && data[x-1][y+1] == 'M' && data[x+1][y+1] == 'M'
+    # SM
+    # SM
+    return true if data[x-1][y-1] == 'S' && data[x+1][y-1] == 'M' && data[x-1][y+1] == 'S' && data[x+1][y+1] == 'M'
+    # MS
+    # MS
+    return true if data[x-1][y-1] == 'M' && data[x+1][y-1] == 'S' && data[x-1][y+1] == 'M' && data[x+1][y+1] == 'S'
+    return false
   end
 
   def check_forward(x, y)
