@@ -6,11 +6,11 @@ class Block
     @data = Array.new(@lines[0].length){Array.new(@lines.count)}
     @lines.each_with_index do |line, y|
       line.split("").each_with_index do |char, x|
-        @data[y][x] = char
+        @data[x][y] = char
       end
     end
 
-    puts "initialized #{@data}"
+    # puts "initialized #{@data}"
     @count = 0
     @max_x = lines[0].length
     puts lines[0]
@@ -46,10 +46,10 @@ class Block
     lines.each_with_index do |line,y|
       line.split("").each_with_index do |char, x|
         if char == 'X'
-          #puts "found char #{char} at [#{x},#{y}]" if char == "X" 
-          #puts "count is currently #{count}"
+          # puts "found char #{char} at [#{x},#{y}]" if char == "X" 
+          # puts "count is currently #{count}"
           subcount = check_all_xmas(x, y)
-          puts "found char #{char} at [#{x},#{y}]" if char == "X" && subcount > 0
+          # puts "found char #{char} at [#{x},#{y}]" if char == "X" && subcount > 0
           puts "---found #{subcount} at #{x} #{y}" if subcount > 0
           @count += subcount
         end
@@ -57,6 +57,7 @@ class Block
       y += 1
     end
     puts "found grand total count of #{count}"
+	# puts print_loc(5, 9)
   end
 
   def check_all_xmas(x, y)
@@ -73,9 +74,18 @@ class Block
   end
 
   def check_forward(x, y)
-    return if (x+3) > max_x
+    return if (x+3) >= max_x
 
     return data[x][y] == 'X' && data[x+1][y] == 'M' && data[x+2][y] == 'A' && data[x+3][y] == 'S'
+  end
+
+  def print_loc(x, y)
+    puts "checking x {x}, y {y}"
+    a = data[x][y]
+    b = data[x+1][y]
+    c = data[x+2][y]
+    d = data[x+3][y]
+    puts a, b, c, d
   end
 
   def check_back(x, y)
@@ -85,42 +95,42 @@ class Block
   end
 
   def check_down(x, y)
-    return if (y+3) >= max_y
+    return if (y+3) > max_y
 
-    return data[y][x] == 'X' && data[y+1][x] == 'M' && data[y+2][x] == 'A' && data[y+3][x] == 'S'
+    return data[x][y] == 'X' && data[x][y+1] == 'M' && data[x][y+2] == 'A' && data[x][y+3] == 'S'
   end
 
   def check_up(x, y)
     return if (y-3) < 0
 
-    return data[y][x] == 'X' && data[y-1][x] == 'M' && data[y-2][x] == 'A' && data[y-3][x] == 'S'
+    return data[x][y] == 'X' && data[x][y-1] == 'M' && data[x][y-2] == 'A' && data[x][y-3] == 'S'
   end
 
   def check_dl(x, y)
     return if (x-3) < 0 
-    return if (y+3) > max_y
+    return if (y+3) >= max_y
 
-    return data[y][x] == 'X' && data[y+1][x-1] == 'M' && data[y+2][x-2] == 'A' && data[y+3][x-3] == 'S'
+    return data[x][y] == 'X' && data[x-1][y+1] == 'M' && data[x-2][y+2] == 'A' && data[x-3][y+3] == 'S'
   end
 
   def check_dr(x, y)
     return if (x+3) >= max_x 
     return if (y+3) >= max_y 
-    puts "#w{x} #{y}: check_dr: #{data[y][x]} #{data[y+1][x+1]} #{data[y+2][x+2]} #{data[y+3][x+3]}"
-    return data[y][x] == 'X' && data[y+1][x+1] == 'M' && data[y+2][x+2] == 'A' && data[y+3][x+3] == 'S'
+
+    return data[x][y] == 'X' && data[x+1][y+1] == 'M' && data[x+2][y+2] == 'A' && data[x+3][y+3] == 'S'
   end
 
   def check_ul(x, y)
     return if (x-3) < 0 
     return if (y-3) < 0 
 
-    return data[y][x] == 'X' && data[y-1][x-1] == 'M' && data[y-2][x-2] == 'A' && data[y-3][x-3] == 'S'
+    return data[x][y] == 'X' && data[x-1][y-1] == 'M' && data[x-2][y-2] == 'A' && data[x-3][y-3] == 'S'
   end
 
   def check_ur(x, y)
-    return if (x+3) > max_x
+    return if (x+3) >= max_x
     return if (y-3) < 0
 
-    return data[y][x] == 'X' && data[y-1][x+1] == 'M' && data[y-2][x+2] == 'A' && data[y-3][x+3] == 'S'
+    return data[x][y] == 'X' && data[x+1][y-1] == 'M' && data[x+2][y-2] == 'A' && data[x+3][y-3] == 'S'
   end
 end
