@@ -21,7 +21,7 @@ class Person
   end
 
   def on_board?(x, y, map)
-    map.print_map(map.room)
+    # map.print_map(map.room)
     puts 
     max_y = map.room.length
     max_x = map.room[0].length
@@ -29,7 +29,7 @@ class Person
   end
 
   def is_in_room?(map)
-    map.print_map(map.room)
+    # map.print_map(map.room)
     max_y = map.room.length
     max_x = map.room[0].length
     return location[:x] > 0 && location[:y] > 0 && location[:x] < max_x && location[:y] < max_y
@@ -40,7 +40,7 @@ class Person
     max_x = map.room[0].length
     next_x = location[:x] + dir_vector[:x]
     next_y = location[:y] + dir_vector[:y]
-    puts "next_x #{next_x}, next_y #{next_y}, max_x #{max_x} max_y #{max_y}"
+    # puts "next_x #{next_x}, next_y #{next_y}, max_x #{max_x} max_y #{max_y}"
     return next_x < 0 || next_y < 0 || next_x >= max_x || next_y >= max_y
   end
 
