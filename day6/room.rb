@@ -44,5 +44,16 @@ class Room
       end
     end
   end
+
+  def count_trail(map)
+    count = 0
+    map.each do |row|
+      row.each do |char|
+        count += 1 if char == 'X'
+      end
+    end
+    puts "found count: #{count}"
+    count
+  end
 end
 

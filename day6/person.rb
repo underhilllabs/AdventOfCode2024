@@ -15,11 +15,14 @@ class Person
   def look(room)
     y = location[:y] + dir_vector[:y]
     x = location[:x] + dir_vector[:x]
+    # return false unless on_board?(x, y, room)
+
     room.room[location[:y] + dir_vector[:y] ][location[:x] + dir_vector[:x]]
   end
 
-  def off_board?(x, y, map)
+  def on_board?(x, y, map)
     map.print_map(map.room)
+    puts 
     max_y = map.room.length
     max_x = map.room[0].length
     return x  > 0 && y > 0 && x < max_x && y < max_y
@@ -30,6 +33,15 @@ class Person
     max_y = map.room.length
     max_x = map.room[0].length
     return location[:x] > 0 && location[:y] > 0 && location[:x] < max_x && location[:y] < max_y
+  end
+
+  def is_on_border?(map)
+    max_y = map.room.count
+    max_x = map.room[0].length
+    next_x = location[:x] + dir_vector[:x]
+    next_y = location[:y] + dir_vector[:y]
+    puts "next_x #{next_x}, next_y #{next_y}, max_x #{max_x} max_y #{max_y}"
+    return next_x < 0 || next_y < 0 || next_x >= max_x || next_y >= max_y
   end
 
   def move(room)
